@@ -27,10 +27,10 @@ class ItemList{
         let defaults = UserDefaults.standard
         defaults.set(items, forKey: "Saveditems")
         
-        let nItem = defaults.object(forKey: "Saveditems") as? [String] ?? [String]()
-        print("******************")
-        print(nItem)
-        print("******************")
+       // let nItem = defaults.object(forKey: "Saveditems") as? [String] ?? [String]()
+      //  print("******************")
+       // print(nItem)
+       // print("******************")
         
 
     }
