@@ -13,6 +13,7 @@ class DetailsViewController: UIViewController {
     
     //var itemList: ItemList!
     var itemList = ItemList()
+    var index: Int!
     //var items = [Item]()
     
     @IBOutlet weak var nameField: UITextField!
@@ -28,12 +29,22 @@ class DetailsViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if (index != nil) {
+                nameField.text =  itemList.items[index].name
+                SKUField.text = itemList.items[index].SKU
+                descField.text = itemList.items[index].descriptions
+                dateField.date = itemList.items[index].dateAdded
+            
+        }
+    }
+    
     
     @IBAction func save(_ sender: Any) {
         let items = Item(name: nameField.text!, SKU: SKUField.text!, descriptions: descField.text!, dateAdded: dateField.date)
 //
         itemList.addItem(item: items)
-        print(items.name)
+      //  print(items.name)
            
        }
     

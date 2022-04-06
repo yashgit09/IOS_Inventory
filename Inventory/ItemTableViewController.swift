@@ -9,7 +9,7 @@ import UIKit
 
 class ItemTableViewController: UITableViewController {
 	
-    var itemList = ItemList()
+    var itemList: ItemList!
     var items = [Item]()
     
     override func viewDidLoad() {
@@ -20,10 +20,14 @@ class ItemTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.leftBarButtonItem = self.editButtonItem
+        print(#function)
+      //  itemList.save()
+       // print(itemList.itemURL)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
+        //UserDefaults.standard.set(try? PropertyListEncoder().encode(items), forKey: "Saveditems")
         tableView.reloadData()
     }
 
@@ -39,7 +43,7 @@ class ItemTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-      
+        
         return itemList.items.count
         
     }
@@ -106,7 +110,7 @@ class ItemTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dst = segue.destination as! DetailsViewController
         dst.itemList = itemList
-        
+        dst.index = tableView.indexPathForSelectedRow?.row
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         

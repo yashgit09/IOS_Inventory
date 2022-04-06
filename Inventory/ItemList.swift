@@ -13,26 +13,31 @@ import Foundation
 class ItemList{
     //var items = [Item]()
     var items = [Item]()
+
 //    init(autofill: Bool){
 //        if autofill{
 //            items = []
 //        }
+    var itemURL: URL = {
+        let documentDirectories = FileManager.default.urls(for: .documentDirectory, in:
+                .userDomainMask)
+        let documentDirectory = documentDirectories.first!
+        return documentDirectory.appendingPathComponent("item.archive")
+    }()
+    
+    init(){
+        do{
+            let data = try Data(contentsOf: itemURL)
+            items = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Item]
+        } catch let err {
+            print(err)
+        }
+    }
     
     
     func addItem(item: Item){
-        // complete code
-       
-            items.append(item)
+        items.append(item)
         
-        let defaults = UserDefaults.standard
-        defaults.set(items, forKey: "Saveditems")
-        
-        let nItem = defaults.object(forKey: "Saveditems") as? [String] ?? [String]()
-        print("******************")
-        print(nItem)
-        print("******************")
-        
-
     }
     
     func deleteItem(row: Int){
@@ -41,6 +46,16 @@ class ItemList{
     
     func moveItem(from: Int, to: Int){
         // complete code
+    }
+    
+    func save(){
+        do{
+            let data = try NSKeyedArchiver.archivedData(withRootObject: items, requiringSecureCoding: false)
+            try data.write(to: itemURL)
+        }
+        catch let err{
+            print(err)
+        }
     }
     
 }
