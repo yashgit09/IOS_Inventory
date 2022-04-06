@@ -41,7 +41,8 @@ class ItemList{
     }
     
     func deleteItem(row: Int){
-        // complete code
+        
+        items.remove(at: row)
     }
     
     func moveItem(from: Int, to: Int){
