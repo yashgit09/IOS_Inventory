@@ -46,7 +46,9 @@ class ItemList{
     }
     
     func moveItem(from: Int, to: Int){
-        // complete code
+        let itemToMove = items[from]
+        items.remove(at: from)
+        items.insert(itemToMove, at: to)
     }
     
     func save(){
